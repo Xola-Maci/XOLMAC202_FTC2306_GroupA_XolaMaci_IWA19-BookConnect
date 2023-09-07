@@ -1,36 +1,142 @@
-matches = books
-page = 1;
+// the line below will import information from the './data' file
+import { BOOKS_PER_PAGE,authors, genres, books } from "./data";
 
-if (!books && !Array.isArray(books)) throw new Error('Source required') 
-if (!range && range.length < 2) throw new Error('Range must be an array with two numbers')
+const matches = books;
+const range = [0,BOOKS_PER_PAGE];
+let page = 1;
 
-day = {
-    dark: '10, 10, 20',
-    light: '255, 255, 255',
+//Extracting information from the book array in the data js file and displa.
+const dataList = document.querySelector('[data-list-items]');
+
+const Preview = (bookExtract) => {
+    const fragmentPage = document.createDocumentFragment();
+    for (const book of bookExtract) {
+
+        const previewItems = document.createElement('button')
+        previewItems.className = 'preview';
+        previewItems.setAttribute('id', `${books.id}`);
+
+         previewItems.innerHTML = /* html */ `
+            <img
+                class="preview__image"
+                src="${book.image}"
+            />
+            
+            <div class="preview__info">
+                <h3 class="preview__title">${book.title}</h3>
+                <div class="preview__author">${authors[book.author]}</div>
+            </div>`;
+
+            fragmentPage.appendChild(previewItems);
+            dataList.appendChild(fragmentPage)
+    }
 }
+Preview(books.slice(0, BOOKS_PER_PAGE));
 
-night = {
-    dark: '255, 255, 255',
-    light: '10, 10, 20',
-}
+dataList.addEventListener('click', function(event){
+    document.querySelector('[data-list-active]').show();
 
-fragment = document.createDocumentFragment()
-const extracted = books.slice(0, 36)
+    const idBook = event.target.closest('.preview').id;
+    let showingBook =[];
+    for (const actBook of books){
+        if(idBook === actBook.id){
+            showingBook = actBook;
+            break
+        };
+    }
+    dataListImage.src = activeBook.image
+    dataListBlur.src = activeBook.image;
+    dataListTitle.innerHTML = activeBook.title;
+    dataListSubtitle.innerHTML = `${authors[activeBook.author]} (${(activeBook.published).slice(0, 4)})` 
+    dataListDescription.innerHTML = activeBook.description;
 
-for ({ author, image, title, id }; extracted; i++) {
-    const preview = createPreview({
-        author,
-        id,
-        image,
-        title
+
+    activeCloseOverlay.addEventListener('click', function(event){
+        dataListActive.close();
     })
 
-    fragment.appendChild(preview)
+})
+
+/*// copy names from below
+const dataList = document.querySelector('[data-list-items]');
+const fragmentPage = document.createDocumentFragment();
+const extractedItem = books.slice(0,BOOKS_PER_PAGE);
+
+for (let i=0; i < extractedItem.length; i++) {
+    const previewItems = document.createElement('button');
+
+    previewItems.classInfo = 'preview';
+    previewItems.setAttribute('id',`${books[i].id}`);
+
+    sneakPeak.innerHTML = /*html*/ /*`
+    <div>
+       <image class='preview__image' src="${books[i].image}" alt="no picture available" />
+    </div>
+    <div class='preview__info'>
+      <dt class='preview__title'>${books[i].title}</dt>
+      <dt class='preview__author'> By ${authors[books[i].author]}</dt>
+    </div>`;
+
+    fragmentPage.appendChild(previewItems);
+    dataList.appendChild(fragmentPage);
+}
+dataList.appendChild(fragmentPage);*/
+
+// The two conditions below give an arror when the content is not found
+if (!books && !Array.isArray(matches)){
+    throw new Error('Source required')
+} 
+if (!range && range.length < 2) {
+    throw new Error('Range must be an array with two numbers')
 }
 
-data-list-items.appendChild(fragment)
+// CSS theme colour range for the day and night times
+ 
+const theme = {
+    day: {
+        dark: '10, 10, 20',
+        light: '255, 255, 255',
+    },
+    
+    night: {
+        dark: '255, 255, 255',
+        light: '10, 10, 20',
+    }
 
-genres = document.createDocumentFragment()
+}
+
+/**The 'changeTheme' function will allow the user to change the theme of the page
+ * according to their preference
+*/
+const changeTheme = (color) =>{
+ color.preventDefault();
+ const themeOption = document.querySelector("[data-settings-theme]");
+ const themeChange = themeOption.value;
+
+ if(themeChange === theme.day){
+ document.documentElement.style.setProperty("--color-light", theme.day['light']);
+ document.documentElement.style.setProperty("--color-dark", theme.day['dark']);
+ }else if(themeChange === theme.night){
+ document.documentElement.style.setProperty("--color-light", theme.night['light']);
+ document.documentElement.style.setProperty("--color-dark", theme.night['dark']);
+ }
+   document.querySelector("[data-settings-overlay]").close();
+}
+
+const formChange = document.getElementById('settings');
+formChange.addEventListener('submit',changeTheme);
+
+// setting the user theme based on the users preffered device theme
+const darkModePreff = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const themeInit = darkModePreff ? 'night' : 'day';
+document.documentElement.style.setProperty('--color-dark', theme[themeInit].dark);
+document.documentElement.style.setProperty('--color-light', theme[themeInit].light)
+
+
+
+
+
+/**genres = document.createDocumentFragment()
 element = document.createElement('option')
 element.value = 'any'
 element = 'All Genres'
@@ -67,9 +173,9 @@ documentElement.style.setProperty('--color-dark', css[v].dark);
 documentElement.style.setProperty('--color-light', css[v].light);
 data-list-button = "Show more (books.length - BOOKS_PER_PAGE)"
 
-data-list-button.disabled = !(matches.length - [page * BOOKS_PER_PAGE] > 0)
+data-list-button.disabled === !(matches.length - [page * BOOKS_PER_PAGE] > 0)
 
-data-list-button.innerHTML = /* html */ [
+data-list-button.innerHTML === /* html */ /*[
     '<span>Show more</span>',
     '<span class="list__remaining"> (${matches.length - [page * BOOKS_PER_PAGE] > 0 ? matches.length - [page * BOOKS_PER_PAGE] : 0})</span>',
 ]
@@ -124,7 +230,7 @@ data-search-form.click(filters) {
         element.classList = 'preview'
         element.setAttribute('data-preview', id)
 
-        element.innerHTML = /* html */ `
+        element.innerHTML = /* html */ /*`
             <img
                 class="preview__image"
                 src="${image}"
@@ -144,7 +250,7 @@ data-search-form.click(filters) {
     remaining === hasRemaining ? initial : 0
     data-list-button.disabled = initial > 0
 
-    data-list-button.innerHTML = /* html */ `
+    data-list-button.innerHTML = /* html */ /*`
         <span>Show more</span>
         <span class="list__remaining"> (${remaining})</span>
     `
