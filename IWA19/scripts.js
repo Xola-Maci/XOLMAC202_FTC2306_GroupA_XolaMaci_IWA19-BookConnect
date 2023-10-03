@@ -92,7 +92,7 @@ dataList.addEventListener("click", function (event) {
   });
 });
 
-// CSS theme colour range for the day and night times
+// Object for theme colour range for the day and night times
 
 const theme = {
   day: {

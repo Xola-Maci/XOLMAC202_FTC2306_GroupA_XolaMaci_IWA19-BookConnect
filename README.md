@@ -1,7 +1,18 @@
-# XOLMAC202_FTC2306_GroupA_XolaMaci_IWA19-BookConnect //Author
-📚 Web App to be audited as part of final assessment for first JS module
+- [About the App](#about-the-app)
+- [Intsructions on how to use the Book Connect App:](#intsructions-on-how-to-use-the-book-connect-app)
+- [Slideshow Link](#slideshow-link)
+- [Languages Used:](#languages-used)
 
-Intsructions on how to use the Book Connect App:
+<!-- omit in toc -->
+# Author
+Xola Maci
+Student Number: 
+
+# About the App
+This an app were users can search for a book, preview the book and load more books that they
+may be interested in. Users are ables to change the settings of the app based on their preference, wether set it to "Dark" or "Light" mode.
+
+# Intsructions on how to use the Book Connect App:
 
 1. Open app and you(user) will see the list of different books displayed in the page, with cover pages.
 2. User can press the load more, to access more books.
@@ -11,6 +22,11 @@ Intsructions on how to use the Book Connect App:
 6. The 'save' button saves the users choice and implements it.
 7. The 'cancel' button cancels any changes made on the theme.
 
-Slideshow Link: https://docs.google.com/presentation/d/1JHUdQS4qtNMQCNQcRdDu1KKiqaF94jVo4ldkhDMYry0/edit?usp=sharing
+# Slideshow Link
+https://docs.google.com/presentation/d/1JHUdQS4qtNMQCNQcRdDu1KKiqaF94jVo4ldkhDMYry0/edit?usp=sharing
 
-Languages: JavaScript
+# Languages Used: 
+
+JavaScript
+HTML
+CSS
