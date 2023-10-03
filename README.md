@@ -1,3 +1,5 @@
+<!-- omit in toc -->
+# Table of Contents
 - [About the App](#about-the-app)
 - [Intsructions on how to use the Book Connect App:](#intsructions-on-how-to-use-the-book-connect-app)
 - [Slideshow Link](#slideshow-link)
@@ -5,8 +7,8 @@
 
 <!-- omit in toc -->
 # Author
-Xola Maci
-Student Number: 
+Xola Maci 
+Student Number: XOLMAC202
 
 # About the App
 This an app were users can search for a book, preview the book and load more books that they
